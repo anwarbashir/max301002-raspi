@@ -14,7 +14,7 @@ int main()
 
 	fd = wiringPiI2CSetup(0x57);
 	
-	cout << "Init result: "<< fd << endl;
+	std::cout << "Init result: " << std::hex << fd << endl;
 	
 	sanity = wiringPiI2CReadReg8(fd, 0xFF); // of working should return 0x15
 	
