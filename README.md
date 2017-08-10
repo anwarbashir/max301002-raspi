@@ -29,10 +29,9 @@ GND, INT, SCL, SDA, VIN (3,3 volts), there is a step down chip on the break out 
 
 Okay, assuming you have connected to the Raspberry Pi, we need need to check that the Raspberry Pi can see the device.
 
-To do this ensure that the IC2 interface is enable using raspi-config, then enter;
-i2cdetect -y 0
-//or
-i2cdetect -y 1
+To do this ensure that the IC2 interface is enabled using raspi-config, then enter;
+
+i2cdetect -y 0 or i2cdetect -y 1 (depends if you have earlier or later version of Raspberry Pi)
 
 This command will display a table and within that table the device id will be displayed. In the case of max301002 it should be 57.
 
@@ -44,7 +43,9 @@ But before starting lets create some pseudo-code that we intend to follow.
 
 Step 1. Sanity check 
 This will ensure that we have the product id and revision id (optionally) and thereby some confidence that our program is communicating with the device
+
 Step 2. Intialize the device.
 In the mbed code there is a init() function in the MAX30102.cpp file, we can use this as a guide to intialise the device.
+
 Step 3. Loop
 Keep checking for when the IRQ goes low and when it does read the FIFO
