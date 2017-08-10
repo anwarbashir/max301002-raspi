@@ -5,13 +5,12 @@ This is work in progress!
 This interface program is being developed for a maxrefdes117#:Heart-Rate and Pulse-Oximetry monitor.
 Device details are available at //https://www.maximintegrated.com/en/design/reference-design-center/system-board/6300.html
 
-Under the Design Resources Firmware quick start guides and demo programs are available for arduino and mbed platforms.
+Under the Design Resources Firmware, quick start guides and demo programs are available for arduino and mbed platforms.
 
-However, the Raspberry Pi is not supported. Whilst I am a novice I would like to devlop a basic program to 
-obtain data from the device using a step-by-step approach. I
+However, the Raspberry Pi is not supported and I think this would be a useful addition.
 
 I should point out I am a novice and this is my first attempt at devloping a program to interface with a sensor, so bear with me. 
-Also I wish to thank Naing Ye Aung, Applications Enginner at MamimIntegrated for his
+Also I wish to thank Naing Ye Aung, Applications Engineer at MamimIntegrated for his
 assistance in helping me develop this program.
 
 Before starting you should inspect the datasheet available https://datasheets.maximintegrated.com/en/ds/MAX30102.pdf
