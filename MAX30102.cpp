@@ -56,7 +56,7 @@
 * ownership rights.
 *******************************************************************************
 */
-#include "mbed.h"
+//#include "mbed.h"
 #include "MAX30102.h"
 
 #ifdef TARGET_MAX32600MBED
