@@ -1,14 +1,27 @@
-
+#include <stdio.h>
 #include <iostream>
 #include <errno.h>
 #include <wiringPiI2C.h>
+#include <wiringPi.h>
 
 #include "MAX30102.h"
 
 using namespace std;
 
+//declare INTERUPT pin here currently INT of MAX30102 is connected to GPIO17
+//Digital In
+
+//declare switch that will be used to start the readings
+const int butPin = 3;
+
+//Digital In 
+
 int main()
 {
+	wiringPiSetup();
+	
+	pinMode(butPin, INPUT);
+	
 	int fd, partID, revisionID, intr_1;
 		
 	// Obtain fd by sending I2C device ID, i.e. 57
@@ -32,6 +45,19 @@ int main()
 	
 	std::cout << "INTR_1: " << std::hex << intr_1 << endl;
 	
+	//declare variables to calculate the on-board LED brightness that reflects the heartbeats
 	
-
+	//reset the MAX30102
+	
+	//read and clear status register
+	
+	//wait until the user presses a button 
+	
+	pinMode(butPin, INPUT);
+	for (;;)
+	{
+		printf("%d\n",digitalRead(butPin)); delay(75);		
+	}
+	
+	return 0;
 }
