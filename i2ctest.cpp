@@ -38,12 +38,23 @@ int main()
 	
 	std::cout << "RevisionID: " << std::hex << revisionID << endl;
 	
+	//wait until user presses a button on GPIO butPin 
+	
+	printf("Press button to begin scan\n");
+	
+	while(digitalRead(butPin)) {delay(75);}
+	
+	//check interupt power ready register
+	
+	intr_1 = wiringPiI2CWriteReg8(fd, REG_INTR_STATUS_1, 0x00);
+	
+	std::cout << "INTR_1: " << std::hex << intr_1 << endl;
 	
 	//Initialise the MAX30102
 	
-	intr_1 = wiringPiI2CWriteReg8(fd, REG_INTR_ENABLE_1, 0xc0);
+	//intr_1 = wiringPiI2CWriteReg8(fd, REG_INTR_ENABLE_1, 0xc0);
 	
-	std::cout << "INTR_1: " << std::hex << intr_1 << endl;
+	//std::cout << "INTR_1: " << std::hex << intr_1 << endl;
 	
 	//declare variables to calculate the on-board LED brightness that reflects the heartbeats
 	
@@ -51,13 +62,6 @@ int main()
 	
 	//read and clear status register
 	
-	//wait until the user presses a button 
-	
-	pinMode(butPin, INPUT);
-	for (;;)
-	{
-		printf("%d\n",digitalRead(butPin)); delay(75);		
-	}
 	
 	return 0;
 }
