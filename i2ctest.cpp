@@ -14,6 +14,9 @@ using namespace std;
 //declare switch that will be used to start the readings
 const int butPin = 3;
 
+//declare interupt pin that is connected ????
+const int irqPin = 0;
+
 //Digital In 
 
 int main()
@@ -21,8 +24,9 @@ int main()
 	wiringPiSetup();
 	
 	pinMode(butPin, INPUT);
+	pinMode(irqPin, INPUT);
 	
-	int fd, partID, revisionID, intr_1;
+	int fd, partID, revisionID, reset, intr_1;
 		
 	// Obtain fd by sending I2C device ID, i.e. 57
 
@@ -37,6 +41,11 @@ int main()
 	revisionID = wiringPiI2CReadReg8(fd, REG_REV_ID); // to find revision
 	
 	std::cout << "RevisionID: " << std::hex << revisionID << endl;
+	
+	//reset the MAX30102
+	reset = wiringPiI2CWriteReg8(fd, REG_MODE_CONFIG,0x40);
+	
+	std::cout << "Reset: " << std::hex << reset << endl;
 	
 	//wait until user presses a button on GPIO butPin 
 	
@@ -61,7 +70,6 @@ int main()
 	//reset the MAX30102
 	
 	//read and clear status register
-	
 	
 	return 0;
 }
