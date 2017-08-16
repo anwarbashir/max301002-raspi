@@ -1,11 +1,5 @@
 #include "MAX30102.h"
 
-#ifdef TARGET_MAX32600MBED
-I2C i2c(I2C1_SDA, I2C1_SCL);
-#else
-I2C i2c(I2C_SDA, I2C_SCL);
-#endif
-
 bool maxim_max30102_write_reg(uint8_t uch_addr, uint8_t uch_data)
 /**
 * \brief        Write a value to a MAX30102 register
@@ -22,10 +16,13 @@ bool maxim_max30102_write_reg(uint8_t uch_addr, uint8_t uch_data)
   ach_i2c_data[0]=uch_addr;
   ach_i2c_data[1]=uch_data;
   
+/**
+  
   if(i2c.write(I2C_WRITE_ADDR, ach_i2c_data, 2, false)==0)
     return true;
   else
     return false;
+**/
 }
 
 bool maxim_max30102_read_reg(uint8_t uch_addr, uint8_t *puch_data)
@@ -42,6 +39,8 @@ bool maxim_max30102_read_reg(uint8_t uch_addr, uint8_t *puch_data)
 {
   char ch_i2c_data;
   ch_i2c_data=uch_addr;
+  
+  /**
   if(i2c.write(I2C_WRITE_ADDR, &ch_i2c_data, 1, true)!=0)
     return false;
   if(i2c.read(I2C_READ_ADDR, &ch_i2c_data, 1, false)==0)
@@ -51,6 +50,7 @@ bool maxim_max30102_read_reg(uint8_t uch_addr, uint8_t *puch_data)
   }
   else
     return false;
+/**
 }
 
 bool maxim_max30102_init()
@@ -64,6 +64,8 @@ bool maxim_max30102_init()
 * \retval       true on success
 */
 {
+
+/**
   if(!maxim_max30102_write_reg(REG_INTR_ENABLE_1,0xc0)) // INTR setting
     return false;
   if(!maxim_max30102_write_reg(REG_INTR_ENABLE_2,0x00))
@@ -87,7 +89,9 @@ bool maxim_max30102_init()
     return false;
   if(!maxim_max30102_write_reg(REG_PILOT_PA,0x7f))   // Choose value for ~ 25mA for Pilot LED
     return false;
-  return true;  
+  return true;
+ **/
+   
 }
 
 bool maxim_max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led)
@@ -108,6 +112,8 @@ bool maxim_max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led)
   *pun_ir_led=0;
   char ach_i2c_data[6];
   
+  
+  /**
   //read and clear status register
   maxim_max30102_read_reg(REG_INTR_STATUS_1, &uch_temp);
   maxim_max30102_read_reg(REG_INTR_STATUS_2, &uch_temp);
@@ -139,7 +145,7 @@ bool maxim_max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led)
   *pun_red_led&=0x03FFFF;  //Mask MSB [23:18]
   *pun_ir_led&=0x03FFFF;  //Mask MSB [23:18]
   
-  
+  **/
   return true;
 }
 
@@ -154,9 +160,12 @@ bool maxim_max30102_reset()
 * \retval       true on success
 */
 {
+	/**
     if(!maxim_max30102_write_reg(REG_MODE_CONFIG,0x40))
         return false;
     else
         return true;    
+
+**/
 }
 
